@@ -2,8 +2,11 @@
 
 ## Punkte
 Funktionalität
-- Login
-- 
+- Login (Mit zb OAUTH)
+- Budgetausgaben 
+- Configuration Plus eingab
+- Statistiken anzeigen
+
 Persistenz
 - Preferenzen (Login speichern, etc)
 - Datenspeicher (DB oder Files?)
