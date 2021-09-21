@@ -8,6 +8,9 @@ Persistenz
 - Preferenzen (Login speichern, etc)
 - Datenspeicher (DB oder Files?)
 
+Verwendung von Aktoren und Sensoren
+- Vibration
+
 Unterschiedliche Styles
 - Light Theme
 - Dark Theme
