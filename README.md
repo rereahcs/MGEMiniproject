@@ -26,3 +26,10 @@ Integration von Drittkomponenten
 Erstellung eines App Widgets (Home Screen)
 
 Sinvolles Testing
+
+Manu, 28.9.21: Mögliche Erweiterungen (falls Zeit und Lust):
+* Kamera einbinden, um ein Foto der Ausgabe zu machen
+* Mehrsprachigkeit (Deutsch & Englisch)
+* Toasts (beim Erstellen eines neuen Eintrages), Snackbars (beim Löschen eines Eintrages mit Undo)
+* Notifications
+
