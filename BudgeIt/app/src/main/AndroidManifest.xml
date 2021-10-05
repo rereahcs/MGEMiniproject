@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgeIt">
         <activity
+            android:name=".ItemActivity"
+            android:exported="true" />
+        <activity
             android:name=".StatisticActivity"
             android:exported="true" />
         <activity
