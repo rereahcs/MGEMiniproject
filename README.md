@@ -1,8 +1,8 @@
 #TODO
 
-TextInputEditText mit Dropdown für preferences: https://material.io/components/text-fields/android#using-text-fields exposed dropdown menu suchen
-snackbar: https://material.io/components/snackbars/android#using-snackbars
-Datepicker: https://www.youtube.com/watch?v=aJ3PXhp6WFk
+- TextInputEditText mit Dropdown für preferences: https://material.io/components/text-fields/android#using-text-fields exposed dropdown menu suchen
+- snackbar: https://material.io/components/snackbars/android#using-snackbars
+- Datepicker: https://www.youtube.com/watch?v=aJ3PXhp6WFk
 
 
 
