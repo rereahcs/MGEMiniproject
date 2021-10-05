@@ -6,76 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".ItemActivity">
 
-    <Spinner
-        android:id="@+id/categorySpinner2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="choose category"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountInput" />
-
-    <Spinner
-        android:id="@+id/categorySpinner3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="choose category"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categorySpinner2" />
-
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/amountInput"
+        android:id="@+id/item_input_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:contentDescription="Input field for amount."
+        android:layout_marginEnd="48dp"
+        android:hint="category"
+        android:minHeight="48dp"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/item_input_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="description"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/item_input_category"
+        app:layout_constraintStart_toStartOf="@+id/item_input_category"
+        app:layout_constraintTop_toBottomOf="@+id/item_input_category" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/item_input_amount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="amount"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/item_input_description"
+        app:layout_constraintStart_toStartOf="@+id/item_input_description"
+        app:layout_constraintTop_toBottomOf="@+id/item_input_description" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/item_input_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:hint="date"
+        android:inputType="date"
+        android:minHeight="48dp"
+        android:singleLine="true"
+        app:boxStrokeWidth="3dp"
+        app:boxStrokeWidthFocused="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/item_input_amount"
+        app:layout_constraintStart_toStartOf="@+id/item_input_amount"
+        app:layout_constraintTop_toBottomOf="@+id/item_input_amount" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/item_button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="save"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button2" />
+        app:layout_constraintStart_toEndOf="@+id/item_button_delete" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/item_button_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="delete"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/item_button_save"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button3" />
+        app:layout_constraintStart_toEndOf="@+id/item_button_cancel" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/item_button_cancel"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"
         android:text="cancel"
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/item_button_delete"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/primaryColor"
+        app:strokeWidth="3dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

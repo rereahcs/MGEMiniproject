@@ -7,7 +7,7 @@
     tools:context=".PreferencesActivity">
 
     <Spinner
-        android:id="@+id/categorySpinner2"
+        android:id="@+id/preferences_spinner_interval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -17,10 +17,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amountInput" />
+        app:layout_constraintTop_toBottomOf="@+id/preferences_input_amount" />
 
     <Spinner
-        android:id="@+id/categorySpinner3"
+        android:id="@+id/preferences_spinner_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -30,23 +30,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categorySpinner2" />
+        app:layout_constraintTop_toBottomOf="@+id/preferences_spinner_interval" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/amountInput"
+        android:id="@+id/preferences_input_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="Input field for amount."
+        android:hint="budget amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"

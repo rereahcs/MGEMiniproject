@@ -7,7 +7,7 @@
     tools:context=".HomeActivity">
 
     <TextView
-        android:id="@+id/restBudgetTextView"
+        android:id="@+id/home_text_restbudget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
@@ -18,41 +18,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/newItemFloatingButton"
+        android:id="@+id/home_floatingbutton_additem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:contentDescription="add new expense"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:focusable="true" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
-        android:id="@+id/currencyTextView"
+        android:id="@+id/home_text_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restBudgetTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/home_text_restbudget" />
 
     <Spinner
-        android:id="@+id/categorySpinner"
+        android:id="@+id/home_spinner_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="choose category"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currencyTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/home_text_currency" />
 
     <View
+        android:id="@+id/home_line"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:layout_marginStart="32dp"
@@ -61,10 +63,10 @@
         android:background="#FF0000FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/home_spinner_category" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
