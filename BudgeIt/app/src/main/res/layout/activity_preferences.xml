@@ -50,10 +50,14 @@
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="75dp"
+        app:itemTextColor="@drawable/selector_menu_bg"
+        app:itemIconTint="@drawable/selector_menu_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"/>
+
+<!--    app:backgroundTint="@drawable/selector_menu_bg"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

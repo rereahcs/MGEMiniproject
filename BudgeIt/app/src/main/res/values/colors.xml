@@ -3,25 +3,17 @@
     <color name="primaryColor">#7D37FF</color>
     <color name="primaryLightColor">#b47cff</color>
     <color name="primaryDarkColor">#3f1dcb</color>
+    <color name="font_light">#370F7E</color>
+    <color name="backgroundLight">#F3F3F3</color>
+    <color name="white">#FFFFFF</color>
 
-    <color name="backgroundLight">#ECEBEB</color>
-
-    <color name="secondaryColor">#6200ea</color>
-    <color name="secondaryLightColor">#9d46ff</color>
-    <color name="secondaryDarkColor">#0a00b6</color>
 
     <color name="bg_night">#291550</color>
     <color name="button_night">#7D37FF</color>
     <color name="font_night">#C8B9E5</color>
     <color name="greyFont_night">#9A8CB4</color>
 
-    <color name="button_light">#6D2BE4</color>
-    <color name="font_light">#370F7E</color>
-    <color name="greyFont_light">#9A8BB4</color>
-    <color name="light_blue_600">#FF039BE5</color>
-    <color name="light_blue_900">#FF01579B</color>
-    <color name="light_blue_A200">#FF40C4FF</color>
-    <color name="light_blue_A400">#FF00B0FF</color>
+
     <color name="black_overlay">#66000000</color>
 
 

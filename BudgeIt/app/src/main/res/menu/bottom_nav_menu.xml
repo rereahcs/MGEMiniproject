@@ -2,12 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/person"
-        android:title="Statistic" />
+        android:icon="@drawable/ic_statistics"
+        android:title="Statistic"
+        />
 <!--        android:icon="@drawable/ic_person_foreground" />-->
     <item
         android:id="@+id/home"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
         android:id="@+id/settings"
+        android:icon="@drawable/ic_preferences"
         android:title="Settings" />
 </menu>
