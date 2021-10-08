@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatisticActivity">
+    tools:context=".activities.StatisticActivity">
 
     <Spinner
         android:id="@+id/home_spinner_category"
@@ -34,7 +34,7 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
+        android:id="@+id/bottom_nav_menu"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PreferencesActivity">
+    tools:context=".activities.SettingsActivity">
 
     <Spinner
         android:id="@+id/preferences_spinner_interval"
@@ -47,17 +47,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
+        android:id="@+id/bottom_nav_menu"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        app:itemTextColor="@drawable/selector_menu_bg"
-        app:itemIconTint="@drawable/selector_menu_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu"/>
-
-<!--    app:backgroundTint="@drawable/selector_menu_bg"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

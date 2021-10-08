@@ -1,14 +1,16 @@
-package ch.ost.rj.mge.budgeit;
+package ch.ost.rj.mge.budgeit.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class HomeActivity extends AppCompatActivity {
+import ch.ost.rj.mge.budgeit.R;
+
+public class ItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_item);
     }
 }
