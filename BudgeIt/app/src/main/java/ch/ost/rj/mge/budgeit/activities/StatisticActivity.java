@@ -19,12 +19,13 @@ public class StatisticActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistic);
 
+        // initialize menu
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_menu);
         bottomNav.setOnItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.statistic);
     }
 
-    // Navigation Listener for Menu
+    // navigation listener for menu
     public BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
             case R.id.home:

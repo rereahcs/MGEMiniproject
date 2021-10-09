@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -19,12 +21,20 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        // initialize menu
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav_menu);
         bottomNav.setOnItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.settings);
+
+        // currency spinner
+        Spinner currencySpinner = findViewById(R.id.preferences_spinner_currency);
+        ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,
+                R.array.currency_array, android.R.layout.simple_spinner_item);
+        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currencySpinner.setAdapter(currencyAdapter);
     }
 
-    // Navigation Listener for Menu
+    // navigation listener for menu
     public BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
             case R.id.statistic:
