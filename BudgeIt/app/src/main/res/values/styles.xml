@@ -5,4 +5,8 @@
         <item name="android:color">?android:attr/buttonBarStyle</item>
     </style>
 
+    <style name="lines" parent="">
+        <item name="android:background">@color/primaryColor</item>
+    </style>
+
 </resources>

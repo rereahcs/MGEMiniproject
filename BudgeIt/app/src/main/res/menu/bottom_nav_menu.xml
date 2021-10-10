@@ -3,15 +3,15 @@
     <item
         android:id="@+id/statistic"
         android:icon="@drawable/ic_statistics"
-        android:title="Statistic"
+        android:title="STATS"
         />
 <!--        android:icon="@drawable/ic_person_foreground" />-->
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="HOME" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_preferences"
-        android:title="Settings" />
+        android:title="SETTING" />
 </menu>
