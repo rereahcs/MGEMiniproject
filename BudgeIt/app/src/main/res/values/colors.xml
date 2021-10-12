@@ -5,10 +5,12 @@
     <color name="primaryDarkColor">#3f1dcb</color>
     <color name="font_light">#370F7E</color>
     <color name="backgroundLight">#F3F3F3</color>
+    <color name="offBackground">#E6E6E6</color>
     <color name="white">#FFFFFF</color>
 
 
     <color name="bg_night">#170C2E</color>
+    <color name="offBackgroundNight">#21153B</color>
 	<color name="black">#000000</color>
     <color name="button_night">#7D37FF</color>
     <color name="font_night">#C8B9E5</color>

@@ -20,6 +20,8 @@
         <item name="colorSecondary">@color/primaryColor</item>
         <item name="colorOnSecondary">@color/backgroundLight</item>
 
+        <item name="android:popupBackground">@color/offBackground</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
 

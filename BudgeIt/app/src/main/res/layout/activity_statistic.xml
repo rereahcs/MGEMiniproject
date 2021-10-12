@@ -13,15 +13,18 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="32dp"
-        android:contentDescription="choose category"
-        app:itemTextColor="@drawable/selector_menu_bg"
+        android:contentDescription="@string/choose_category"
+        android:minHeight="48dp"
         app:itemIconTint="@drawable/selector_menu_bg"
+        app:itemTextColor="@drawable/selector_menu_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
+        android:id="@+id/view"
+        style="@style/lines"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:layout_marginStart="32dp"
@@ -29,8 +32,20 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_spinner_category"
-        style="@style/lines" />
+        app:layout_constraintTop_toBottomOf="@+id/home_spinner_category" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/settings_barchart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
