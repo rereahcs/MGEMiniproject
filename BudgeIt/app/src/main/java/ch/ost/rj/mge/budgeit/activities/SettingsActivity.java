@@ -26,6 +26,13 @@ public class SettingsActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.settings);
 
+        // interval spinner
+        Spinner intervalSpinner = findViewById(R.id.preferences_spinner_interval);
+        ArrayAdapter<CharSequence> intervalAdapter = ArrayAdapter.createFromResource(this,
+                R.array.interval_array, android.R.layout.simple_spinner_item);
+        intervalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        intervalSpinner.setAdapter(intervalAdapter);
+
         // currency spinner
         Spinner currencySpinner = findViewById(R.id.preferences_spinner_currency);
         ArrayAdapter<CharSequence> currencyAdapter = ArrayAdapter.createFromResource(this,
