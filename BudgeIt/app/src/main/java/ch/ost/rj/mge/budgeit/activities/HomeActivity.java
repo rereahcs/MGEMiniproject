@@ -1,21 +1,21 @@
 package ch.ost.rj.mge.budgeit.activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.List;
+
 import ch.ost.rj.mge.budgeit.R;
+import ch.ost.rj.mge.budgeit.db.BudgeItDatabase;
+import ch.ost.rj.mge.budgeit.model.Item;
+import ch.ost.rj.mge.budgeit.model.ItemDao;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // navigation listener for menu
-    public BottomNavigationView.OnItemSelectedListener navListener = item -> {
+    private BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
             case R.id.statistic:
                 startActivity(StatisticActivity.class);
@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showSnackbar() {
+    private void showSnackbar() {
         ViewGroup parent = findViewById(R.id.layout_activity_home);
         String text = "Entry deleted";
         int duration = Snackbar.LENGTH_LONG;
@@ -68,5 +68,19 @@ public class HomeActivity extends AppCompatActivity {
         // TODO: implement undo --> idea: only delete logically (flag) and use id to set the flag to false again
         snackbar.setAction(action, v -> snackbar.dismiss());
         snackbar.show();
+    }
+
+    // db-helper methods for adapter
+    private List<Item> getAllItems() {
+        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
+        ItemDao itemDao = db.itemDao();
+        return itemDao.getItems();
+    }
+
+    // db-helper methods for adapter
+    private List<Item> getItemsByCategory(String categoryName) {
+        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
+        ItemDao itemDao = db.itemDao();
+        return itemDao.getItemsByCategory(categoryName);
     }
 }

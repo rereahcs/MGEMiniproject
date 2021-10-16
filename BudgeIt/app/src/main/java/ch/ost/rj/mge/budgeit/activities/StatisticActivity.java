@@ -1,9 +1,11 @@
 package ch.ost.rj.mge.budgeit.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +34,7 @@ public class StatisticActivity extends AppCompatActivity {
 
     private LineChart chart;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +58,13 @@ public class StatisticActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private List<Entry> genereateTestData() {
         Item[] dataObjects= new Item[4];
-        dataObjects[0] = new Item(16.50F, "lunch", new Date());
-        dataObjects[1] = new Item(3.50F, "bread", new Date());
-        dataObjects[2] = new Item(40.00F, "weekly shopping", new Date());
-        dataObjects[3] = new Item(2.50F, "lunch", new Date());
+        dataObjects[0] = new Item("lunch", "", 16.50F, LocalDate.now());
+        dataObjects[1] = new Item("bread", "", 3.50F, LocalDate.now());
+        dataObjects[2] = new Item("weekly shopping", "", 40.00F, LocalDate.now());
+        dataObjects[3] = new Item("lunch", "", 2.50F, LocalDate.now());
 
         List<Entry> entries = new ArrayList<Entry>();
         for (Item data : dataObjects) {
@@ -71,7 +75,7 @@ public class StatisticActivity extends AppCompatActivity {
     }
 
     // navigation listener for menu
-    public BottomNavigationView.OnItemSelectedListener navListener = item -> {
+    private BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
             case R.id.home:
                 startActivity(HomeActivity.class);

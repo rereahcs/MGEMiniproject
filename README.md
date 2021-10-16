@@ -17,8 +17,8 @@ Funktionalität
 - Statistiken anzeigen
 
 Persistenz
-- Preferenzen (Login speichern, etc)
-- Datenspeicher (DB oder Files?)
+- Preferenzen (Settings)
+- Room-DB (Items & Categories)
 
 Verwendung von Aktoren und Sensoren
 - Vibration
@@ -41,4 +41,8 @@ Manu, 28.9.21: Mögliche Erweiterungen (falls Zeit und Lust):
 * Mehrsprachigkeit (Deutsch & Englisch)
 * Toasts (beim Erstellen eines neuen Eintrages), Snackbars (beim Löschen eines Eintrages mit Undo)
 * Notifications
+
+##Optimierungen
+* Auslagern des Menu Listener
+* DB-Zugriffe in einem eigenen Thread
 
