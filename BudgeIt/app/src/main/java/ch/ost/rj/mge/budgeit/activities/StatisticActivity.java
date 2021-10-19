@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -36,27 +40,51 @@ public class StatisticActivity extends AppCompatActivity {
         bottomNav.setOnItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.statistic);
 
-        chart = (LineChart) findViewById(R.id.settings_barchart);
-        List<Entry> entries = prepareDataForVisual();
-
-        LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
+        chart = (LineChart) findViewById(R.id.settings_linechart);
+        chart.setTouchEnabled(true);
+        chart.setPinchZoom(true);
+        LineDataSet dataSet = new LineDataSet(prepareLineData(), "Label"); // add entries to dataset
 //        dataSet.setColor(...);
 //        dataSet.setValueTextColor(...);
-
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
+        chart.getDescription().setText("Ausgaben im Monat");
+        chart.getDescription().setTextSize(12);
+        chart.getXAxis().setTextColor(0);
         chart.invalidate(); // refresh
 
+        BarDataSet dataSetBarChart = new BarDataSet(prepareBarData(), "Label");
+        BarChart bchart = (BarChart) findViewById(R.id.settings_barchart);
+        bchart.setTouchEnabled(true);
+        bchart.setPinchZoom(true);
+        BarData barData = new BarData(dataSetBarChart);
+        bchart.setData(barData);
+        bchart.getDescription().setText("Ausgaben im Monat");
+        bchart.getDescription().setTextSize(12);
+        bchart.getXAxis().setTextColor(0);
+        bchart.invalidate(); // refresh
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private List<Entry> prepareDataForVisual() {
+    private List<Entry> prepareLineData() {
 
         List<Item> items = getAllItems();
         List<Entry> entries = new ArrayList<>();
         for (Item data : items) {
             // turn your data into Entry objects
-            entries.add(new Entry(data.getAmount(), data.getAmount()));
+            entries.add(new Entry(data.getDate().getDayOfMonth(), data.getAmount()));
+        }
+        return entries;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private List<BarEntry> prepareBarData() {
+
+        List<Item> items = getAllItems();
+        List<BarEntry> entries = new ArrayList<>();
+        for (Item data : items) {
+            // turn your data into Entry objects
+            entries.add(new BarEntry(data.getDate().getDayOfMonth(), data.getAmount()));
         }
         return entries;
     }

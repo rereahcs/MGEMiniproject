@@ -26,6 +26,8 @@ import ch.ost.rj.mge.budgeit.adapter.ItemViewHolder;
 import ch.ost.rj.mge.budgeit.adapter.ItemsAdapter;
 import ch.ost.rj.mge.budgeit.adapter.OnItemClickListenerHome;
 import ch.ost.rj.mge.budgeit.db.BudgeItDatabase;
+import ch.ost.rj.mge.budgeit.model.Category;
+import ch.ost.rj.mge.budgeit.model.CategoryDao;
 import ch.ost.rj.mge.budgeit.model.Item;
 import ch.ost.rj.mge.budgeit.model.ItemDao;
 
@@ -115,11 +117,19 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         return itemDao.getItemsByCategory(categoryName);
     }
 
+    // db-helper methods for adapter
+    private List<Category> getCategories(String categoryName) {
+        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
+        CategoryDao categoryDao = db.categoryDao();
+        return categoryDao.getCategories();
+    }
+
     @Override
     public void onItemClick(int position) {
         //TODO: Pass Identity to ItemActivity to show
         Item item = data.get(position);
         Intent intent = new Intent(this,ItemActivity.class );
+        intent.putExtra(ItemActivity.ITEMID, item.getId());
         startActivity(intent);
     }
 
@@ -134,6 +144,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             //TODO: Remove Item, ie flag as removed.
             //data.remove(viewHolder.getAdapterPosition());
             data.get(viewHolder.getAdapterPosition()).setDeleted(true);
+
             showSnackbar();
             adapter.notifyDataSetChanged();
         }

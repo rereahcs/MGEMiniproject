@@ -24,6 +24,8 @@ import ch.ost.rj.mge.budgeit.model.Item;
 import ch.ost.rj.mge.budgeit.model.ItemDao;
 
 public class ItemActivity extends AppCompatActivity {
+    public static final String ITEMID = "";
+
     private TextInputEditText itemInputCategory;
     private TextInputEditText itemInputDescription;
     private TextInputEditText itemInputAmount;
