@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ch.ost.rj.mge.budgeit.R;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    //public View itemView;
+
     ConstraintLayout parentView;
     TextView category;
     TextView name;

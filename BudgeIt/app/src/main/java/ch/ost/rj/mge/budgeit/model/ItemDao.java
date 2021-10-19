@@ -15,8 +15,17 @@ public interface ItemDao {
     @Query("SELECT * FROM Item WHERE is_deleted=0")
     List<Item> getNotDeletedItems();
 
+    @Query("SELECT * FROM Item WHERE category = :selectedCategory AND is_deleted=0")
+    List<Item> getNotDeletedItemsByCategory(String selectedCategory);
+
     @Query("SELECT * FROM Item WHERE category = :selectedCategory")
     List<Item> getItemsByCategory(String selectedCategory);
+
+    @Query("SELECT SUM(amount) FROM Item WHERE is_deleted=0")
+    float getRestBudgetAll();
+
+    @Query("SELECT SUM(amount) FROM Item WHERE category = :selectedCategory AND is_deleted=0")
+    float getRestBudgetByCategory(String selectedCategory);
 
     @Insert
     void insert(Item item);

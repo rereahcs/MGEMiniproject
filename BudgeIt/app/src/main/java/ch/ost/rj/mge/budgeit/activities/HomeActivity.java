@@ -2,7 +2,6 @@ package ch.ost.rj.mge.budgeit.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,10 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,11 +31,16 @@ import ch.ost.rj.mge.budgeit.model.Category;
 import ch.ost.rj.mge.budgeit.model.CategoryDao;
 import ch.ost.rj.mge.budgeit.model.Item;
 import ch.ost.rj.mge.budgeit.model.ItemDao;
+import ch.ost.rj.mge.budgeit.services.ModelServices;
+import ch.ost.rj.mge.budgeit.services.PreferencesService;
 
 public class HomeActivity extends AppCompatActivity implements OnItemClickListenerHome {
 
     RecyclerView.Adapter<ItemViewHolder> adapter;
     private List<Item> data;
+    private String currency;
+    private TextView budget;
+    private Spinner categorySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,41 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         bottomNav.setOnItemSelectedListener(navListener);
         bottomNav.setSelectedItemId(R.id.home);
 
+        // category spinner
+        categorySpinner = findViewById(R.id.home_spinner_category);
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                updateItems();
+                updateAdapter();
+                updateRestBudget();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+
+        });
+        List<String> categoryNames = ModelServices.getCategoryNamesForSpinner(getApplicationContext());
+        categoryNames.add(0,"All");
+
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_item,
+                categoryNames);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
+
+        //RestBudget Textview, Achtung, Spinner MUSS schon initialisiert sein!
+        budget = findViewById(R.id.home_text_restbudget);
+        updateRestBudget();
+
+        //Currecny Textview
+        TextView currecny = findViewById(R.id.home_text_currency);
+        PreferencesService service = new PreferencesService();
+        int currencyInt = service.readCurrencySetting(this);
+
         // listener for add button
         FloatingActionButton addButton = findViewById(R.id.home_floatingbutton_additem);
         addButton.setOnClickListener(v -> startActivity(ItemActivity.class));
@@ -56,20 +97,32 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             showSnackbar();
         }
 
-        data = getAllItems();
+        // adapter
+        updateItems();
+        updateAdapter();
 
+    }
+
+    private void updateAdapter() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         adapter = new ItemsAdapter(data, this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-
-        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.itemlist_divider));
-
         RecyclerView recyclerView = findViewById(R.id.home_recyclerView_items);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(dividerItemDecoration);
-        new ItemTouchHelper(itemTouchHeloerCallback).attachToRecyclerView(recyclerView);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+    }
 
+    private void updateItems() {
+        String selectedCategory = categorySpinner.getSelectedItem().toString();
+        data = ModelServices.getNotDeleteItems(getApplicationContext(), selectedCategory);
+    }
+
+    private void updateRestBudget() {
+        String selectedCategory = categorySpinner.getSelectedItem().toString();
+        float budgetFloat = ModelServices.getRestBudget(getApplicationContext(), selectedCategory);
+        budget.setText(String.valueOf(budgetFloat));
     }
 
     // navigation listener for menu
@@ -98,42 +151,21 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
         Snackbar snackbar = Snackbar.make(parent, text, duration);
         // TODO: implement undo --> idea: only delete logically (flag) and use id to set the flag to false again
+        //Please call updateItems() and updateAdapter() if you undo the delte!
         snackbar.setAction(action, v -> snackbar.dismiss());
         snackbar.show();
-    }
-
-    // db-helper methods for adapter
-    private List<Item> getAllItems() {
-        //Changed to get only Filtered Items!
-        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
-        ItemDao itemDao = db.itemDao();
-        return itemDao.getNotDeletedItems();
-    }
-
-    // db-helper methods for adapter
-    private List<Item> getItemsByCategory(String categoryName) {
-        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
-        ItemDao itemDao = db.itemDao();
-        return itemDao.getItemsByCategory(categoryName);
-    }
-
-    // db-helper methods for adapter
-    private List<Category> getCategories(String categoryName) {
-        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
-        CategoryDao categoryDao = db.categoryDao();
-        return categoryDao.getCategories();
     }
 
     @Override
     public void onItemClick(int position) {
         //TODO: Pass Identity to ItemActivity to show
         Item item = data.get(position);
-        Intent intent = new Intent(this,ItemActivity.class );
+        Intent intent = new Intent(this, ItemActivity.class );
         intent.putExtra(ItemActivity.ITEMID, item.getId());
         startActivity(intent);
     }
 
-    ItemTouchHelper.SimpleCallback itemTouchHeloerCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
             return false;
@@ -141,12 +173,20 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            //TODO: Remove Item, ie flag as removed.
-            //data.remove(viewHolder.getAdapterPosition());
-            data.get(viewHolder.getAdapterPosition()).setDeleted(true);
 
+            //TODO: Remove Item, ie flag as removed.
             showSnackbar();
-            adapter.notifyDataSetChanged();
+            //data.remove(viewHolder.getAdapterPosition());
+
+            Item item = data.get(viewHolder.getAdapterPosition());
+            item.setDeleted(true);
+            ModelServices.updateItem(getApplicationContext(), item);
+
+            updateItems();
+            updateRestBudget();
+//            adapter.notifyDataSetChanged();
+            updateAdapter();
+
         }
     };
 }
