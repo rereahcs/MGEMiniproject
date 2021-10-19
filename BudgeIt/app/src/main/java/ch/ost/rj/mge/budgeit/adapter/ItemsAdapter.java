@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+import ch.ost.rj.mge.budgeit.R;
 import ch.ost.rj.mge.budgeit.model.Item;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
@@ -28,18 +29,13 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View view = inflater.inflate(
-                android.R.layout.simple_list_item_2,
+                R.layout.layout_listitem,
                 parent,
                 false
         );
 
-        TextView itemNameView = view.findViewById(android.R.id.text1);
-        TextView itemAmountView = view.findViewById(android.R.id.text2);
-
         return new ItemViewHolder(
                 view,
-                itemNameView,
-                itemAmountView,
                 onItemClickListenerHome
         );
     }
@@ -47,8 +43,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Item item = this.items.get(position);
-        holder.itemNameView.setText(item.getCategory());
-        holder.itemAmountView.setText(String.valueOf(item.getAmount()));
+        holder.category.setText(item.getCategory());
+        holder.name.setText(item.getDescription());
+        holder.amount.setText(String.valueOf(item.getAmount()));
     }
 
     @Override

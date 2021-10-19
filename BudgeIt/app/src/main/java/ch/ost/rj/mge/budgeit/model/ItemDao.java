@@ -12,6 +12,9 @@ public interface ItemDao {
     @Query("SELECT * FROM Item")
     List<Item> getItems();
 
+    @Query("SELECT * FROM Item WHERE is_deleted=0")
+    List<Item> getNotDeletedItems();
+
     @Query("SELECT * FROM Item WHERE category = :selectedCategory")
     List<Item> getItemsByCategory(String selectedCategory);
 

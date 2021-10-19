@@ -1,7 +1,10 @@
 package ch.ost.rj.mge.budgeit.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,13 +60,13 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         adapter = new ItemsAdapter(data, this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
 
+        dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.itemlist_divider));
+
         RecyclerView recyclerView = findViewById(R.id.home_recyclerView_items);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(dividerItemDecoration);
-
-
-
+        new ItemTouchHelper(itemTouchHeloerCallback).attachToRecyclerView(recyclerView);
 
     }
 
@@ -99,9 +102,10 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     // db-helper methods for adapter
     private List<Item> getAllItems() {
+        //Changed to get only Filtered Items!
         BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
         ItemDao itemDao = db.itemDao();
-        return itemDao.getItems();
+        return itemDao.getNotDeletedItems();
     }
 
     // db-helper methods for adapter
@@ -113,8 +117,25 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onItemClick(int position) {
+        //TODO: Pass Identity to ItemActivity to show
         Item item = data.get(position);
         Intent intent = new Intent(this,ItemActivity.class );
         startActivity(intent);
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchHeloerCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            //TODO: Remove Item, ie flag as removed.
+            //data.remove(viewHolder.getAdapterPosition());
+            data.get(viewHolder.getAdapterPosition()).setDeleted(true);
+            showSnackbar();
+            adapter.notifyDataSetChanged();
+        }
+    };
 }
