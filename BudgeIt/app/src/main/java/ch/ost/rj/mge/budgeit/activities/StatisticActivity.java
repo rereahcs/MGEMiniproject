@@ -2,33 +2,24 @@ package ch.ost.rj.mge.budgeit.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import ch.ost.rj.mge.budgeit.R;
+import ch.ost.rj.mge.budgeit.db.BudgeItDatabase;
 import ch.ost.rj.mge.budgeit.model.Item;
+import ch.ost.rj.mge.budgeit.model.ItemDao;
 
 public class StatisticActivity extends AppCompatActivity {
 
@@ -46,7 +37,7 @@ public class StatisticActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.statistic);
 
         chart = (LineChart) findViewById(R.id.settings_barchart);
-        List<Entry> entries = genereateTestData();
+        List<Entry> entries = prepareDataForVisual();
 
         LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
 //        dataSet.setColor(...);
@@ -59,15 +50,11 @@ public class StatisticActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private List<Entry> genereateTestData() {
-        Item[] dataObjects= new Item[4];
-        dataObjects[0] = new Item("lunch", "", 16.50F, LocalDate.now());
-        dataObjects[1] = new Item("bread", "", 3.50F, LocalDate.now());
-        dataObjects[2] = new Item("weekly shopping", "", 40.00F, LocalDate.now());
-        dataObjects[3] = new Item("lunch", "", 2.50F, LocalDate.now());
+    private List<Entry> prepareDataForVisual() {
 
-        List<Entry> entries = new ArrayList<Entry>();
-        for (Item data : dataObjects) {
+        List<Item> items = getAllItems();
+        List<Entry> entries = new ArrayList<>();
+        for (Item data : items) {
             // turn your data into Entry objects
             entries.add(new Entry(data.getAmount(), data.getAmount()));
         }
@@ -92,4 +79,17 @@ public class StatisticActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // db-helper methods for adapter
+    private List<Item> getAllItems() {
+        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
+        ItemDao itemDao = db.itemDao();
+        return itemDao.getItems();
+    }
+
+    // db-helper methods for adapter
+    private List<Item> getItemsByCategory(String categoryName) {
+        BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
+        ItemDao itemDao = db.itemDao();
+        return itemDao.getItemsByCategory(categoryName);
+    }
 }

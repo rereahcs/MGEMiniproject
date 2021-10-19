@@ -1,10 +1,16 @@
 package ch.ost.rj.mge.budgeit.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -13,11 +19,17 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 import ch.ost.rj.mge.budgeit.R;
+import ch.ost.rj.mge.budgeit.adapter.ItemViewHolder;
+import ch.ost.rj.mge.budgeit.adapter.ItemsAdapter;
+import ch.ost.rj.mge.budgeit.adapter.OnItemClickListenerHome;
 import ch.ost.rj.mge.budgeit.db.BudgeItDatabase;
 import ch.ost.rj.mge.budgeit.model.Item;
 import ch.ost.rj.mge.budgeit.model.ItemDao;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements OnItemClickListenerHome {
+
+    RecyclerView.Adapter<ItemViewHolder> adapter;
+    private List<Item> data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +50,21 @@ public class HomeActivity extends AppCompatActivity {
         if (showSnackbar) {
             showSnackbar();
         }
+
+        data = getAllItems();
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        adapter = new ItemsAdapter(data, this);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+
+        RecyclerView recyclerView = findViewById(R.id.home_recyclerView_items);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+
+
+
     }
 
     // navigation listener for menu
@@ -82,5 +109,12 @@ public class HomeActivity extends AppCompatActivity {
         BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
         ItemDao itemDao = db.itemDao();
         return itemDao.getItemsByCategory(categoryName);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Item item = data.get(position);
+        Intent intent = new Intent(this,ItemActivity.class );
+        startActivity(intent);
     }
 }
