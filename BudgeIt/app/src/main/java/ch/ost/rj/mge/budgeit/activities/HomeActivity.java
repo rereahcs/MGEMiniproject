@@ -82,10 +82,12 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         budget = findViewById(R.id.home_text_restbudget);
         updateRestBudget();
 
-        //Currecny Textview
-        TextView currecny = findViewById(R.id.home_text_currency);
+        //Currency Textview
+        TextView currencyTextView = findViewById(R.id.home_text_currency);
         PreferencesService service = new PreferencesService();
-        int currencyInt = service.readCurrencySetting(this);
+        String currencyString = service.getCurrencySettingAsString(this);
+        currencyTextView.setText(currencyString);
+
 
         // listener for add button
         FloatingActionButton addButton = findViewById(R.id.home_floatingbutton_additem);
