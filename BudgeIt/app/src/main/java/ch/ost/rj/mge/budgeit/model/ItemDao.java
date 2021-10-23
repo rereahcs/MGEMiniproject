@@ -9,6 +9,9 @@ import java.util.List;
 
 @Dao
 public interface ItemDao {
+    @Query("SELECT * FROM Item WHERE id=:id")
+    Item getItemById(int id);
+
     @Query("SELECT * FROM Item")
     List<Item> getItems();
 

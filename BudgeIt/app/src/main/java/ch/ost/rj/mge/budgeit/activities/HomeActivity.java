@@ -96,7 +96,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         // check if snackbar should be showed (from ItemActivity delete entry)
         boolean showSnackbar = getIntent().getBooleanExtra("showSnackbar", false);
         if (showSnackbar) {
-            showSnackbar();
+            int deletedItemId = getIntent().getIntExtra("deletedItemId", -1);
+            showSnackbar(deletedItemId);
         }
 
         // adapter
@@ -145,25 +146,30 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         startActivity(intent);
     }
 
-    private void showSnackbar() {
+    private void showSnackbar(int deletedItemId) {
         ViewGroup parent = findViewById(R.id.layout_activity_home);
         String text = "Entry deleted";
         int duration = Snackbar.LENGTH_LONG;
         String action = "Undo";
 
         Snackbar snackbar = Snackbar.make(parent, text, duration);
-        // TODO: implement undo --> idea: only delete logically (flag) and use id to set the flag to false again
-        //Please call updateItems() and updateAdapter() if you undo the delte!
-        snackbar.setAction(action, v -> snackbar.dismiss());
+        // undo deletion of item
+        snackbar.setAction(action, v -> {
+            Item item = ModelServices.getItemById(getApplicationContext(), deletedItemId);
+            item.setDeleted(false);
+            ModelServices.updateItem(getApplicationContext(), item);
+            updateItems();
+            updateAdapter();
+            snackbar.dismiss();
+        });
         snackbar.show();
     }
 
     @Override
     public void onItemClick(int position) {
-        //TODO: Pass Identity to ItemActivity to show
         Item item = data.get(position);
         Intent intent = new Intent(this, ItemActivity.class );
-        intent.putExtra(ItemActivity.ITEMID, item.getId());
+        intent.putExtra("itemId", item.getId());
         startActivity(intent);
     }
 
@@ -175,18 +181,14 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-            //TODO: Remove Item, ie flag as removed.
-            showSnackbar();
-            //data.remove(viewHolder.getAdapterPosition());
-
             Item item = data.get(viewHolder.getAdapterPosition());
             item.setDeleted(true);
             ModelServices.updateItem(getApplicationContext(), item);
 
+            showSnackbar(item.getId());
+
             updateItems();
             updateRestBudget();
-//            adapter.notifyDataSetChanged();
             updateAdapter();
 
         }

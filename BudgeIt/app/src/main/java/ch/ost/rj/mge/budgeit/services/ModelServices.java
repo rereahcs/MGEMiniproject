@@ -13,6 +13,12 @@ import ch.ost.rj.mge.budgeit.model.ItemDao;
 
 public class ModelServices {
 
+    public static Item getItemById(Context context, int id) {
+        BudgeItDatabase db = BudgeItDatabase.getInstance(context);
+        ItemDao itemDao = db.itemDao();
+        return itemDao.getItemById(id);
+    }
+
     public static List<Item> getAllItems(Context context) {
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
