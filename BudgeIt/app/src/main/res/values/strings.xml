@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">BudgeIt</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="add_new_expense">add new expense</string>
     <string name="currency">currency</string>
     <string name="restBudget">rest Budget</string>
@@ -15,6 +13,9 @@
     <string name="choose_interval">choose interval</string>
     <string name="choose_category">choose category</string>
     <string name="see_your_expenses_per_day">See your expenses per day</string>
+    <string name="stats">STATS</string>
+    <string name="home">HOME</string>
+    <string name="setting">SETTING</string>
 
     <string-array name="currency_array">
         <item>CHF</item>

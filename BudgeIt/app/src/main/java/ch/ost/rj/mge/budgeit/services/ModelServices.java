@@ -2,16 +2,11 @@ package ch.ost.rj.mge.budgeit.services;
 
 import android.content.Context;
 import android.os.Build;
-
 import androidx.annotation.RequiresApi;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
 import ch.ost.rj.mge.budgeit.db.BudgeItDatabase;
 import ch.ost.rj.mge.budgeit.model.Category;
 import ch.ost.rj.mge.budgeit.model.CategoryDao;
@@ -41,14 +36,14 @@ public class ModelServices {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static List<Item> getNotDeleteItems(Context context, String category) {
 
-        LocalDate startdate = getDate(context);
+        LocalDate startDate = getDate(context);
 
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
         if(category.equals("All Categories")) {
-            return itemDao.getNotDeletedItems(startdate);
+            return itemDao.getNotDeletedItems(startDate);
         } else {
-            return itemDao.getNotDeletedItemsByCategory(category, startdate);
+            return itemDao.getNotDeletedItemsByCategory(category, startDate);
         }
     }
 
@@ -88,14 +83,14 @@ public class ModelServices {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static float getRestBudget(Context context, String category) {
 
-        LocalDate startdate = getDate(context);
-
+        LocalDate startDate = getDate(context);
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
+
         if(category.equals("All Categories")) {
-            return itemDao.getRestBudgetAll(startdate);
+            return itemDao.getRestBudgetAll(startDate);
         } else {
-            return itemDao.getRestBudgetByCategory(category, startdate);
+            return itemDao.getRestBudgetByCategory(category, startDate);
         }
 
     }

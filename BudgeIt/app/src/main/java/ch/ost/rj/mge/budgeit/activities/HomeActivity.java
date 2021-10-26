@@ -69,14 +69,14 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         List<String> categoryNames = ModelServices.getCategoryNamesForSpinner(getApplicationContext());
         categoryNames.add(0,"All Categories");
 
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 categoryNames);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
 
-        //RestBudget Textview, Achtung, Spinner MUSS schon initialisiert sein!
+        //RestBudget Textview
         budget = findViewById(R.id.home_text_restbudget);
         updateRestBudget();
 
@@ -85,7 +85,8 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         PreferencesService service = new PreferencesService();
         String currencyString = service.getCurrencySettingAsString(this);
         String totalAmount = String.valueOf(service.readAmountSetting(this));
-        currencyTextView.setText("von " + totalAmount + " " + currencyString);
+        String currencyText = "von " + totalAmount + " " + currencyString;
+        currencyTextView.setText(currencyText);
 
         // listener for add button
         FloatingActionButton addButton = findViewById(R.id.home_floatingbutton_additem);
@@ -129,7 +130,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     }
 
     // navigation listener for menu
-    private BottomNavigationView.OnItemSelectedListener navListener = item -> {
+    private final BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
             case R.id.statistic:
                 startActivity(StatisticActivity.class);
@@ -146,6 +147,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         startActivity(intent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void showSnackbar(int deletedItemId) {
         ViewGroup parent = findViewById(R.id.layout_activity_home);
         String text = "Entry deleted";
@@ -160,6 +162,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             item.setDeleted(false);
             ModelServices.updateItem(getApplicationContext(), item);
             updateItems();
+            updateRestBudget();
             updateAdapter();
             snackbar.dismiss();
         });
@@ -181,6 +184,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             return false;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 

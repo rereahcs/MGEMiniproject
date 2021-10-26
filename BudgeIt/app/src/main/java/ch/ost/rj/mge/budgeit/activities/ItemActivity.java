@@ -69,7 +69,8 @@ public class ItemActivity extends AppCompatActivity {
             categoryPresent = true;
             itemInputDescription.setText(currentItem.getDescription());
             descriptionPresent = true;
-            itemInputAmount.setText(Float.toString(currentItem.getAmount()));
+            String currency = Float.toString(currentItem.getAmount());
+            itemInputAmount.setText(currency);
             amountValid = true;
 
             LocalDate creationDate = currentItem.getDate();
@@ -184,6 +185,7 @@ public class ItemActivity extends AppCompatActivity {
 
     private void saveEntry() {
         // get information on the item
+        // ignores NullPointerException possibility, as we check this in UI
         String itemCategory = itemInputCategory.getText().toString();
         String itemDescription = itemInputDescription.getText().toString();
         String itemAmount = itemInputAmount.getText().toString();

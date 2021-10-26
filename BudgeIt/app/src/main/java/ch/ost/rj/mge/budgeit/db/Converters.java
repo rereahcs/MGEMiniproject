@@ -1,10 +1,8 @@
 package ch.ost.rj.mge.budgeit.db;
 
 import android.os.Build;
-
 import androidx.annotation.RequiresApi;
 import androidx.room.TypeConverter;
-
 import java.time.LocalDate;
 
 public class Converters {

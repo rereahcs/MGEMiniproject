@@ -15,20 +15,27 @@
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/BudgeIt/app/src/main/res/layout/activity_preferemces.xml" value="0.2" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/BudgeIt/app/src/main/res/layout/activity_statistic.xml" value="0.176" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/BudgeIt/app/src/main/res/menu/bottom_nav_menu.xml" value="0.16" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable-anydpi/ic_home.xml" value="0.1" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable-anydpi/ic_preferences.xml" value="0.1" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable-night/selector_lines.xml" value="0.1" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable-night/selector_menu_bg.xml" value="0.1" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22864583333333333" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/icon_home_background.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/itemlist_divider.xml" value="0.1" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/selector.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/selector_lines.xml" value="0.1" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/selector_menu_bg.xml" value="0.1" />
-        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_home.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/selector_spinner_border.xml" value="0.1" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/drawable/spinner_border.xml" value="0.1" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_item.xml" value="0.2" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_main.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_preferences.xml" value="0.264" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_settings.xml" value="0.18645833333333334" />
-        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_statistic.xml" value="0.152" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/activity_statistic.xml" value="0.2" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/fragment_item.xml" value="0.11474164133738601" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/layout_listitem.xml" value="0.264" />
+        <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/layout/text_row_item.xml" value="0.1" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22777777777777777" />
         <entry key="..\:/Users/yschaerer/Desktop/Sem_7/MGE/Testat/MGEMiniproject/BudgeIt/app/src/main/res/mipmap-anydpi-v26/icon_home.xml" value="0.18854166666666666" />
       </map>

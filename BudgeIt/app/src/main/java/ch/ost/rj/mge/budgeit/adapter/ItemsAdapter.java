@@ -4,18 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
-
 import ch.ost.rj.mge.budgeit.R;
 import ch.ost.rj.mge.budgeit.model.Item;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
     private List<Item> items;
-    private OnItemClickListenerHome onItemClickListenerHome;
+    private final OnItemClickListenerHome onItemClickListenerHome;
 
     public ItemsAdapter(List<Item> items, OnItemClickListenerHome onItemClickListenerHome) {
         this.items=items;

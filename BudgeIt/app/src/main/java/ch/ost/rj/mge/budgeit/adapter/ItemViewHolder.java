@@ -2,20 +2,17 @@ package ch.ost.rj.mge.budgeit.adapter;
 
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import ch.ost.rj.mge.budgeit.R;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    ConstraintLayout parentView;
-    TextView category;
-    TextView name;
-    TextView amount;
-
-    OnItemClickListenerHome onItemClickListenerHome;
+    private ConstraintLayout parentView;
+    public TextView category;
+    public TextView name;
+    public TextView amount;
+    private final OnItemClickListenerHome onItemClickListenerHome;
 
     public ItemViewHolder(
             View itemView,

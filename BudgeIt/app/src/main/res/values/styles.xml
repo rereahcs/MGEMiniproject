@@ -1,10 +1,5 @@
 <resources>
 
-    <style name="Widget.Theme.BudgeIt.ButtonBar.Fullscreen" parent="">
-        <item name="android:color">@color/black_overlay</item>
-        <item name="android:color">?android:attr/buttonBarStyle</item>
-    </style>
-
     <style name="lines" parent="">
         <item name="android:background">@color/primaryColor</item>
     </style>

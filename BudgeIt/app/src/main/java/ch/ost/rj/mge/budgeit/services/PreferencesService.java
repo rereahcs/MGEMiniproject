@@ -2,7 +2,6 @@ package ch.ost.rj.mge.budgeit.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import ch.ost.rj.mge.budgeit.R;
 
 public class PreferencesService {
@@ -15,7 +14,6 @@ public class PreferencesService {
     // amount settings
     public void writeAmountSetting(Context context, int amount) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
-
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(amountKey, amount);
         editor.commit();
@@ -23,14 +21,12 @@ public class PreferencesService {
 
     public int readAmountSetting(Context context) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
-
         return preferences.getInt(amountKey, 1000);
     }
 
     // interval settings
     public void writeIntervalSetting(Context context, int intervalIndex) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
-
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(intervalKey, intervalIndex);
         editor.commit();
@@ -38,7 +34,6 @@ public class PreferencesService {
 
     public int readIntervalSetting(Context context) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
-
         return preferences.getInt(intervalKey, 0);
     }
 
@@ -50,7 +45,6 @@ public class PreferencesService {
     // currency settings
     public void writeCurrencySetting(Context context, int currencyIndex) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
-
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(currencyKey, currencyIndex);
         editor.commit();
@@ -58,7 +52,6 @@ public class PreferencesService {
 
     public int readCurrencySetting(Context context) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
-
         return preferences.getInt(currencyKey, 0);
     }
 

@@ -35,7 +35,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         // amount input
         TextInputEditText amountInput = findViewById(R.id.preferences_input_amount);
-        amountInput.setText(Integer.toString(preferencesService.readAmountSetting(context)));
+        String amountText = Integer.toString(preferencesService.readAmountSetting(context));
+        amountInput.setText(amountText);
         amountInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -46,6 +47,8 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 try {
+                    // Ignores NullPointerException possibility, as we have default 1
+                    // TODO: Gives by default 1?
                     preferencesService.writeAmountSetting(context, Integer.parseInt(amountInput.getText().toString()));
                 } catch (NumberFormatException e) {
                     amountInput.setError("Please provide a number");
@@ -101,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     // navigation listener for menu
-    private BottomNavigationView.OnItemSelectedListener navListener = item -> {
+    private final BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
             case R.id.statistic:
                 startActivity(StatisticActivity.class);
