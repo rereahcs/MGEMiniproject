@@ -47,10 +47,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 try {
-                    // Ignores NullPointerException possibility, as we have default 1
-                    // TODO: Gives by default 1?
-                    preferencesService.writeAmountSetting(context, Integer.parseInt(amountInput.getText().toString()));
-                } catch (NumberFormatException e) {
+                    int amountInputInt = Integer.parseInt(amountInput.getText().toString());
+                    preferencesService.writeAmountSetting(context, amountInputInt);
+                } catch (NumberFormatException|NullPointerException e) {
                     amountInput.setError("Please provide a number");
                 }
             }
