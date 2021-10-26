@@ -151,7 +151,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
         Snackbar snackbar = Snackbar.make(parent, text, duration);
         // TODO: implement undo --> idea: only delete logically (flag) and use id to set the flag to false again
-        //Please call updateItems() and updateAdapter() if you undo the delte!
+        //Please call updateItems() and updateAdapter() if you undo the delete!
         snackbar.setAction(action, v -> snackbar.dismiss());
         snackbar.show();
     }
@@ -174,7 +174,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-            //TODO: Remove Item, ie flag as removed.
             showSnackbar();
             //data.remove(viewHolder.getAdapterPosition());
 

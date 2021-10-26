@@ -12,13 +12,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -31,14 +36,12 @@ import ch.ost.rj.mge.budgeit.services.ModelServices;
 public class StatisticActivity extends AppCompatActivity {
 
 
-    private Spinner intervalSpinner;
-    //private ModelServices modelServices;
-    private LineChart lineChart;
-    private LineDataSet lineDataSet;
-    private LineData lineData;
-    private BarChart barChart;
+    private Spinner categorySpinner;
+
+    private HorizontalBarChart barChart;
     private BarDataSet barDataSet;
     private BarData barData;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -53,18 +56,16 @@ public class StatisticActivity extends AppCompatActivity {
         bottomNav.setSelectedItemId(R.id.statistic);
 
         // category spinner
-        intervalSpinner = findViewById(R.id.home_spinner_category);
-        intervalSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        categorySpinner = findViewById(R.id.home_spinner_category);
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                updateLineData();
                 updateBarData();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                updateLineData();
-                updateBarData();
+
             }
 
         });
@@ -76,18 +77,10 @@ public class StatisticActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_item,
                 categoryNames);
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        intervalSpinner.setAdapter(categoryAdapter);
+        categorySpinner.setAdapter(categoryAdapter);
 
-        // line chart
-        lineChart = findViewById(R.id.settings_linechart);
-        lineChart.setTouchEnabled(true);
-        lineChart.setPinchZoom(true);
-        lineChart.getDescription().setText("Ausgaben im Monat");
-        lineChart.getDescription().setTextSize(12);
-        lineChart.getXAxis().setTextColor(0);
-        updateLineData();
 
-        // bar chart
+        // bar chart, need Spinner initialized!
 
         barChart = findViewById(R.id.settings_barchart);
         barChart.setTouchEnabled(true);
@@ -97,47 +90,25 @@ public class StatisticActivity extends AppCompatActivity {
         barChart.getXAxis().setTextColor(0);
         updateBarData();
 
-
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void updateLineData() {
-        lineDataSet = new LineDataSet(prepareLineData(), "Label"); // add entries to dataset
-        lineData = new LineData(lineDataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate(); // refresh
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateBarData() {
-        barDataSet = new BarDataSet(prepareBarData(), "Label");
+        barDataSet = new BarDataSet(prepareBarData(), "CHF");
         barData = new BarData(barDataSet);
+        barData.setBarWidth(1f);
         barChart.setData(barData);
         barChart.invalidate(); // refresh
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private List<Entry> prepareLineData() {
-        String selectedCategory = intervalSpinner.getSelectedItem().toString();
-        List<Item> items;
-        if(selectedCategory=="All") {
-            items = ModelServices.getItemsByCategory(getApplicationContext(), selectedCategory);
-        } else {
-            items = ModelServices.getAllItems(getApplicationContext());
-        }
-
-        List<Entry> entries = new ArrayList<>();
-        for (Item data : items) {
-            // turn your data into Entry objects
-            entries.add(new Entry(data.getDate().getDayOfMonth(), data.getAmount()));
-        }
-        return entries;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private List<BarEntry> prepareBarData() {
+        String selectedCategory = categorySpinner.getSelectedItem().toString();
 
-        List<Item> items = ModelServices.getAllItems(getApplicationContext());
+        List<Item> items=ModelServices.getNotDeleteItems(getApplicationContext(), selectedCategory);
+
         List<BarEntry> entries = new ArrayList<>();
         for (Item data : items) {
             // turn your data into Entry objects
@@ -145,6 +116,7 @@ public class StatisticActivity extends AppCompatActivity {
         }
         return entries;
     }
+
 
     // navigation listener for menu
     private BottomNavigationView.OnItemSelectedListener navListener = item -> {

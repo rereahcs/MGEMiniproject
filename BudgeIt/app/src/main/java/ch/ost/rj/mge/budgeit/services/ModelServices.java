@@ -28,7 +28,7 @@ public class ModelServices {
     public static List<Item> getNotDeleteItems(Context context, String category) {
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
-        if(category=="All") {
+        if(category.equals("All")) {
             return itemDao.getNotDeletedItems();
         } else {
             return itemDao.getNotDeletedItemsByCategory(category);
@@ -54,7 +54,7 @@ public class ModelServices {
     public static float getRestBudget(Context context, String category) {
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
-        if(category=="All") {
+        if(category.equals("All")) {
             return itemDao.getRestBudgetAll();
         } else {
             return itemDao.getRestBudgetByCategory(category);
