@@ -34,6 +34,7 @@ Integration von Drittkomponenten (3)
 Jetbag Komponenten (2)
 - zb Material Design Komponent (Snackbar, Spinner, TextInputEditText, etc)
 - Constraint Layout
+- RecylcerView für den items Adapter
 
 App Widgets (Home Screen) (1)
 
