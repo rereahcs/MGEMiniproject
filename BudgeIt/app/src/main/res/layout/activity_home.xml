@@ -91,4 +91,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_line" />
 
+    <TextView
+        android:id="@+id/home_textview_noitems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:text="@string/you_have_no_expenses_in_this_interval"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_spinner_category" />
+
+    <ImageView
+        android:id="@+id/home_imageView_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_textview_noitems"
+        app:srcCompat="@drawable/ic_awesome" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@
     <string name="stats">STATS</string>
     <string name="home">HOME</string>
     <string name="setting">SETTING</string>
+    <string name="you_have_no_expenses_in_this_interval">You have no expenses in this interval.</string>
 
     <string-array name="currency_array">
         <item>CHF</item>

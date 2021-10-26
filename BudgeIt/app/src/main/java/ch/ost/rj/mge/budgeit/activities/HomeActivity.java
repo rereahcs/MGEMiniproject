@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -38,6 +39,9 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     private List<Item> data;
     private TextView budget;
     private Spinner categorySpinner;
+    private TextView emptyView;
+    private RecyclerView recyclerView;
+    private ImageView imageView;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -99,27 +103,45 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             showSnackbar(deletedItemId);
         }
 
-        // adapter
-        updateItems();
+        // adapter and no Items TextView
+        emptyView = (TextView) findViewById(R.id.home_textview_noitems);
+        recyclerView = findViewById(R.id.home_recyclerView_items);
+        imageView = findViewById(R.id.home_imageView_icon);
         updateAdapter();
 
     }
 
-    private void updateAdapter() {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        adapter = new ItemsAdapter(data, this);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        RecyclerView recyclerView = findViewById(R.id.home_recyclerView_items);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(dividerItemDecoration);
-        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateItems() {
         String selectedCategory = categorySpinner.getSelectedItem().toString();
         data = ModelServices.getNotDeleteItems(getApplicationContext(), selectedCategory);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void updateAdapter() {
+        updateItems();
+        if(data.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.VISIBLE);
+        } else {
+            reloadAdapter();
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+        }
+    }
+
+    private void reloadAdapter() {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        adapter = new ItemsAdapter(data, this);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -161,7 +183,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             Item item = ModelServices.getItemById(getApplicationContext(), deletedItemId);
             item.setDeleted(false);
             ModelServices.updateItem(getApplicationContext(), item);
-            updateItems();
             updateRestBudget();
             updateAdapter();
             snackbar.dismiss();
@@ -193,8 +214,6 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
             ModelServices.updateItem(getApplicationContext(), item);
 
             showSnackbar(item.getId());
-
-            updateItems();
             updateRestBudget();
             updateAdapter();
 
