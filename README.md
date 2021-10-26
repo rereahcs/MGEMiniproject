@@ -2,12 +2,12 @@
 ## Idee ##
 Für unser MGE Miniprojekt haben wir die Android App 'BudgeIt' entwickelt, mit der Ausgaben überwacht und ein Budget verwaltet werden kann.
 
-Auf der Home-Screen sieht man die Ausgaben und Rest-Budget für den konfigurierten Zeitraum, das konfigurierte Gesamt-Budget und eine Auflistung der Ausgaben. Die Ausgaben können hierbei nach Kategorie gefiltert werden, wobei bei der Filterung auch die Ausgaben pro Kategorie angezeigt werden.
+Auf dem Home-Screen sieht man die Ausgaben und das Rest-Budget für den konfigurierten Zeitraum, das konfigurierte Gesamt-Budget und eine Auflistung der Ausgaben. Die Ausgaben können hierbei nach Kategorie gefiltert werden, wobei bei der Filterung auch die Ausgaben pro Kategorie angezeigt werden.
 
 --> Screenshot HomeActivity
 Hinweis: Screenshots mit scrcpy über 'AltGr + PrtSc' und dann Paste hier
 
-Über das '+'-Icon auf dem Home-Screen können Ausgaben erfasst werden. Zudem kann man durch anklicken der einzelnen Ausgaben in der Liste auf dem Home-Screen bereits erfasste Ausgaben bearbeiten. Das Speichern einer Ausgabe ist nur verfügbar, wenn die notwendigen Felder ausgefüllt sind. Zudem wird das erfolgreiche Abspeichern mit einem Toast bestätigt. Das Löschen von Items ist nur für bereits erfasste Ausgaben verfügbar. Nach dem Löschen einer Ausgabe wird man auf den Home-Screen navigiert und es wird eine Snackbar angezeigt, die das Löschen bestätigt. In der Snackbar hat man zudem die Möglichkeit den Löschvorgang einer Ausgabe rückgängig zu machen.
+Über das '+'-Icon auf dem Home-Screen können Ausgaben erfasst werden. Zudem kann man durch Anklicken der einzelnen Ausgaben in der Liste auf dem Home-Screen bereits erfasste Ausgaben bearbeiten. Das Speichern einer Ausgabe ist nur verfügbar, wenn die notwendigen Felder ausgefüllt sind. Zudem wird das erfolgreiche Abspeichern mit einem Toast bestätigt. Das Löschen von Items ist nur für bereits erfasste Ausgaben verfügbar. Nach dem Löschen einer Ausgabe wird man auf den Home-Screen navigiert und es wird eine Snackbar angezeigt, die das Löschen bestätigt. In der Snackbar hat man zudem die Möglichkeit den Löschvorgang einer Ausgabe rückgängig zu machen.
 
 --> Screenshot HomeActivity mit relevanten Stellen markiert
 --> Screenshot neues Item erfassen
@@ -33,10 +33,11 @@ Die Ausgaben und die Kategorien werden mit Room persistiert.
 
 ## Features ##
 ### Funktionalität ###
-- Screen 1 (Home): Ausgaben und Restbudget
+- Screen 1 (Home): Ausgaben und Rest-Budget
 - Screen 2 (Settings): Einstellungen
 - Screen 3 (Stats): Statistik
-- Screen 4: (Item): CRUD Operationen sowie Anzeige für Ausgaben
+- Screen 4: (Item): CRUD Operationen für sowie Anzeige von Ausgaben
+- Undo einer Lösch-Operation für Ausgaben
 
 ### Persistenz ###
 - Einstellungen werden als Preferences persistiert
@@ -46,6 +47,7 @@ Die Ausgaben und die Kategorien werden mit Room persistiert.
 ### Unterschiedliche Styles ###
 - Light Theme
 - Dark Theme
+
 Hinweis: Die Styles sind nicht direkt in der App konfigurierbar, sondern sie werden entsprechend der Einstellung im Betriebssystem (Dark Theme) verwendet.
 
 ### Integration von Drittkomponenten ###
@@ -66,6 +68,6 @@ Es wurde ein App Widget für die App erstellt:
 - Menü
 
 ### Android Jetpack Komponenten ###
-- Material Design Komponenten (Snackbar, Spinner, FloatingActionButton, ButtomNavigationView, TextInputEditText
+- Material Design Komponenten (Snackbar, Spinner, FloatingActionButton, ButtomNavigationView, TextInputEditText)
 - Constraint Layout (alle Layouts)
 - Recycler View (Ausgaben)
