@@ -45,7 +45,7 @@ public class ModelServices {
 
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
-        if(category.equals("All")) {
+        if(category.equals("All Categories")) {
             return itemDao.getNotDeletedItems(startdate);
         } else {
             return itemDao.getNotDeletedItemsByCategory(category, startdate);
@@ -92,7 +92,7 @@ public class ModelServices {
 
         BudgeItDatabase db = BudgeItDatabase.getInstance(context);
         ItemDao itemDao = db.itemDao();
-        if(category.equals("All")) {
+        if(category.equals("All Categories")) {
             return itemDao.getRestBudgetAll(startdate);
         } else {
             return itemDao.getRestBudgetByCategory(category, startdate);

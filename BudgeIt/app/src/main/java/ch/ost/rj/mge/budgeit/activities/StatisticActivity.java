@@ -2,6 +2,7 @@ package ch.ost.rj.mge.budgeit.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Build;
@@ -15,6 +16,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -32,13 +34,14 @@ import java.util.List;
 import ch.ost.rj.mge.budgeit.R;
 import ch.ost.rj.mge.budgeit.model.Item;
 import ch.ost.rj.mge.budgeit.services.ModelServices;
+import ch.ost.rj.mge.budgeit.services.PreferencesService;
 
 public class StatisticActivity extends AppCompatActivity {
 
 
     private Spinner categorySpinner;
 
-    private HorizontalBarChart barChart;
+    private BarChart barChart;
     private BarDataSet barDataSet;
     private BarData barData;
 
@@ -70,7 +73,7 @@ public class StatisticActivity extends AppCompatActivity {
 
         });
         List<String> categoryNames = ModelServices.getCategoryNamesForSpinner(getApplicationContext());
-        categoryNames.add(0,"All");
+        categoryNames.add(0,"All Categories");
 
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(
                 this,
@@ -81,13 +84,14 @@ public class StatisticActivity extends AppCompatActivity {
 
 
         // bar chart, need Spinner initialized!
-
         barChart = findViewById(R.id.settings_barchart);
         barChart.setTouchEnabled(true);
         barChart.setPinchZoom(true);
-        barChart.getDescription().setText("Ausgaben im Monat");
+        barChart.getDescription().setText("");
         barChart.getDescription().setTextSize(12);
-        barChart.getXAxis().setTextColor(0);
+        barChart.getXAxis().setTextSize(12);
+        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        //barChart.getXAxis().setTextColor(0);
         updateBarData();
 
     }
@@ -95,10 +99,17 @@ public class StatisticActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateBarData() {
-        barDataSet = new BarDataSet(prepareBarData(), "CHF");
+        PreferencesService service = new PreferencesService();
+        String label = service.getCurrencySettingAsString(getApplicationContext());
+        barDataSet = new BarDataSet(prepareBarData(), label);
+
+        int color = ContextCompat.getColor(getApplicationContext(), R.color.primaryColor);
+        barDataSet.setColor(color);
+
         barData = new BarData(barDataSet);
         barData.setBarWidth(1f);
         barChart.setData(barData);
+        barChart.setFitBars(true);
         barChart.invalidate(); // refresh
     }
 

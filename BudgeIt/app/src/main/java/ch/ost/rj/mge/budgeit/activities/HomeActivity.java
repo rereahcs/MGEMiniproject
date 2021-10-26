@@ -1,6 +1,7 @@
 package ch.ost.rj.mge.budgeit.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
     private TextView budget;
     private Spinner categorySpinner;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +67,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
 
         });
         List<String> categoryNames = ModelServices.getCategoryNamesForSpinner(getApplicationContext());
-        categoryNames.add(0,"All");
+        categoryNames.add(0,"All Categories");
 
         ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(
                 this,
@@ -112,11 +115,13 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateItems() {
         String selectedCategory = categorySpinner.getSelectedItem().toString();
         data = ModelServices.getNotDeleteItems(getApplicationContext(), selectedCategory);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateRestBudget() {
         String selectedCategory = categorySpinner.getSelectedItem().toString();
         float budgetFloat = ModelServices.getRestBudget(getApplicationContext(), selectedCategory);
