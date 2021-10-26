@@ -15,7 +15,6 @@
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/choose_interval"
         android:minHeight="48dp"
-        android:popupBackground="@color/offBackgroundNight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

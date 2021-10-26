@@ -3,6 +3,8 @@ package ch.ost.rj.mge.budgeit.services;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import ch.ost.rj.mge.budgeit.R;
+
 public class PreferencesService {
     static String file = "ch.ost.rj.mge.budgeit.preferences";
     static String amountKey = "key.amount";
@@ -40,6 +42,11 @@ public class PreferencesService {
         return preferences.getInt(intervalKey, 0);
     }
 
+    public String getIntervalSettingAsString(Context context) {
+        String[] intervalStringArray = context.getResources().getStringArray(R.array.interval_array);
+        return intervalStringArray[readIntervalSetting(context)];
+    }
+
     // currency settings
     public void writeCurrencySetting(Context context, int currencyIndex) {
         SharedPreferences preferences = getSharedPreferencesObject(context);
@@ -53,6 +60,11 @@ public class PreferencesService {
         SharedPreferences preferences = getSharedPreferencesObject(context);
 
         return preferences.getInt(currencyKey, 0);
+    }
+
+    public String getCurrencySettingAsString(Context context) {
+        String[] currencyStringArray = context.getResources().getStringArray(R.array.currency_array);
+        return currencyStringArray[readCurrencySetting(context)];
     }
 
     // helper method

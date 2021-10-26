@@ -22,9 +22,11 @@ import ch.ost.rj.mge.budgeit.model.Category;
 import ch.ost.rj.mge.budgeit.model.CategoryDao;
 import ch.ost.rj.mge.budgeit.model.Item;
 import ch.ost.rj.mge.budgeit.model.ItemDao;
+import ch.ost.rj.mge.budgeit.services.ModelServices;
 
 public class ItemActivity extends AppCompatActivity {
-    public static final String ITEMID = "";
+    private int currentItemId;
+    private Item currentItem;
 
     private TextInputEditText itemInputCategory;
     private TextInputEditText itemInputDescription;
@@ -40,7 +42,6 @@ public class ItemActivity extends AppCompatActivity {
     boolean categoryPresent = false;
     boolean amountValid = false;
     boolean descriptionPresent = false;
-    boolean saveButtonEnabled = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -54,18 +55,33 @@ public class ItemActivity extends AppCompatActivity {
         itemInputAmount = findViewById(R.id.item_input_amount);
         itemInputDate = findViewById(R.id.item_input_date);
 
-        // set date if new item is created
-        now = LocalDate.now();
-        String dateString = now.getDayOfMonth() + "." + now.getMonthValue() + "." + now.getYear();
-        itemInputDate.setText(dateString);
+        // check whether new item is created or selected item should be showed
+        currentItemId = getIntent().getIntExtra("itemId", -1);
+        if (currentItemId == -1) {
+            // set date if new item is created
+            now = LocalDate.now();
+            String dateString = now.getDayOfMonth() + "." + now.getMonthValue() + "." + now.getYear();
+            itemInputDate.setText(dateString);
+        } else {
+            // show values of the selected item
+            currentItem = ModelServices.getItemById(getApplicationContext(), currentItemId);
+            itemInputCategory.setText(currentItem.getCategory());
+            categoryPresent = true;
+            itemInputDescription.setText(currentItem.getDescription());
+            descriptionPresent = true;
+            itemInputAmount.setText(Float.toString(currentItem.getAmount()));
+            amountValid = true;
+
+            LocalDate creationDate = currentItem.getDate();
+            String dateString = creationDate.getDayOfMonth() + "." + creationDate.getMonthValue() + "." + creationDate.getYear();
+            itemInputDate.setText(dateString);
+        }
         itemInputDate.setEnabled(false);
 
         // check category input
         itemInputCategory.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                itemInputCategory.setError("Please enter a category");
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -86,9 +102,7 @@ public class ItemActivity extends AppCompatActivity {
         // check description input
         itemInputDescription.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                itemInputDescription.setError("Please enter a description");
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -109,9 +123,7 @@ public class ItemActivity extends AppCompatActivity {
         // check amount input
         itemInputAmount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                itemInputAmount.setError("Please enter an amount");
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
@@ -133,13 +145,19 @@ public class ItemActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.item_button_cancel);
         cancelButton.setOnClickListener(v -> startActivity(HomeActivity.class));
 
-        // listener for delete button
+        // listener for delete button (disabled for new items)
         deleteButton = findViewById(R.id.item_button_delete);
+        boolean deleteButtonEnabled = (currentItemId != -1);
+        float deleteButtonAlpha = deleteButtonEnabled ? 1.0f : 0.5f;
+        deleteButton.setEnabled(deleteButtonEnabled);
+        deleteButton.setAlpha(deleteButtonAlpha);
+
         deleteButton.setOnClickListener(v -> {
             deleteEntry();
             Intent intent = new Intent(this, HomeActivity.class);
             // home activity should show snackbar
             intent.putExtra("showSnackbar", true);
+            intent.putExtra("deletedItemId", currentItemId);
             startActivity(intent);
         });
 
@@ -160,7 +178,8 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void deleteEntry() {
-        // TODO: delete entry
+        currentItem.setDeleted(true);
+        ModelServices.updateItem(getApplicationContext(), currentItem);
     }
 
     private void saveEntry() {
@@ -178,12 +197,20 @@ public class ItemActivity extends AppCompatActivity {
             return;
         }
 
-        // TODO: case update
-        // save new item to db
-        Item item = new Item(itemCategory, itemDescription, itemAmountFloat, now);
         BudgeItDatabase db = BudgeItDatabase.getInstance(getApplicationContext());
         ItemDao itemDao = db.itemDao();
-        itemDao.insert(item);
+
+        if (currentItemId == -1) {
+            // case new item
+            Item newItem = new Item(itemCategory, itemDescription, itemAmountFloat, now);
+            itemDao.insert(newItem);
+        } else {
+            // case update item
+            currentItem.setCategory(itemCategory);
+            currentItem.setDescription(itemDescription);
+            currentItem.setAmount(itemAmountFloat);
+            itemDao.updateItem(currentItem);
+        }
 
         // add category to db if it does not exist yet
         CategoryDao categoryDao = db.categoryDao();
@@ -207,7 +234,7 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void updateSaveButton() {
-        saveButtonEnabled = categoryPresent && amountValid;
+        boolean saveButtonEnabled = categoryPresent && descriptionPresent && amountValid;
         float saveButtonAlpha = saveButtonEnabled ? 1.0f : 0.5f;
 
         saveButton.setEnabled(saveButtonEnabled);
