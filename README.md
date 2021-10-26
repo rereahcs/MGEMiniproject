@@ -1,48 +1,40 @@
 #TODO
 
-- TextInputEditText mit Dropdown für preferences: https://material.io/components/text-fields/android#using-text-fields exposed dropdown menu suchen
 - snackbar: https://material.io/components/snackbars/android#using-snackbars
-- Datepicker: https://www.youtube.com/watch?v=aJ3PXhp6WFk
 - Statistics: https://github.com/PhilJay/MPAndroidChart
-
 
 
 # MGEMiniproject
 
 ## Punkte
-Funktionalität
-- Login (Mit zb OAUTH)
-- Budgetausgaben 
-- Configuration Plus eingab
-- Statistiken anzeigen
+Funktionalität (min 4)
+- Budgetausgaben und Restbudget HOME
+- Configuration SETTINGS
+- Statistiken anzeigen STATISTIC
+- Item CRUD ItemAdd
 
-Persistenz
+Persistenz (2)
 - Preferenzen (Settings)
 - Room-DB (Items & Categories)
+- Offline Fähigkeit
 
-Verwendung von Aktoren und Sensoren
-- Vibration
+Verwendung von Aktoren? (1)
+- Snackbar
+- Toast
 
-Unterschiedliche Styles
+Unterschiedliche Styles (2)
 - Light Theme
 - Dark Theme
 
-Lokalisierung
-
-Integration von Drittkomponenten
+Integration von Drittkomponenten (3)
 - Material Design
+- https://github.com/PhilJay/MPAndroidChart Statistik
+- RoomDB
 
-Erstellung eines App Widgets (Home Screen)
+Jetbag Komponenten (2)
+- zb Material Design Komponent (Snackbar, Spinner, TextInputEditText, etc)
+- Constraint Layout
 
-Sinvolles Testing
+App Widgets (Home Screen) (1)
 
-Manu, 28.9.21: Mögliche Erweiterungen (falls Zeit und Lust):
-* Kamera einbinden, um ein Foto der Ausgabe zu machen
-* Mehrsprachigkeit (Deutsch & Englisch)
-* Toasts (beim Erstellen eines neuen Eintrages), Snackbars (beim Löschen eines Eintrages mit Undo)
-* Notifications
-
-##Optimierungen
-* Auslagern des Menu Listener
-* DB-Zugriffe in einem eigenen Thread
 
