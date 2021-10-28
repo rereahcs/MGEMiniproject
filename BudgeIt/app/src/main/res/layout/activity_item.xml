@@ -96,7 +96,7 @@
         app:layout_constraintEnd_toStartOf="@+id/item_button_delete"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/primaryColor"
+        app:strokeColor="@color/primary_light"
         app:strokeWidth="3dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#7D37FF</color>
-    <color name="primaryLightColor">#b47cff</color>
-    <color name="primaryDarkColor">#3f1dcb</color>
-    <color name="font_light">#370F7E</color>
-    <color name="backgroundLight">#F3F3F3</color>
-    <color name="offBackground">#E6E6E6</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
+<!--    Light Theme-->
+    <color name="primary_light">#7D37FF</color>
+    <color name="font_light">#370F7E</color>
+    <color name="background_light">#F3F3F3</color>
+    <color name="offBackground_light">#E6E6E6</color>
 
-    <color name="bg_night">#170C2E</color>
-    <color name="offBackgroundNight">#21153B</color>
-	<color name="black">#000000</color>
-    <color name="button_night">#7D37FF</color>
+<!--    Dark Theme-->
+    <color name="primary_night">#7D37FF</color>
     <color name="font_night">#C8B9E5</color>
-    <color name="greyFont_night">#9A8CB4</color>
+    <color name="background_night">#170C2E</color>
+    <color name="offBackground_night">#21153B</color>
 
-
-    <color name="black_overlay">#66000000</color>
-
-
-    <color name="colorControlNormal">#2ECC40</color>
-    <color name="colorControlActivated">#01FF70</color>
-    <color name="colorControlHighlight">#FF4136</color>
 </resources>

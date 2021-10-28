@@ -1,24 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.BudgeIt" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryVariant">@color/primaryColor</item>
-        <item name="colorOnPrimary">@color/backgroundLight</item>
-        <item name="android:colorBackground">@color/backgroundLight</item>
+        <item name="fontFamily">@font/verdana_fontfamily</item>
+
+
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/background_light</item>
+        <item name="android:colorBackground">@color/background_light</item>
         <item name="colorOnBackground">@color/font_light</item>
-        <item name="colorSurface">@color/primaryColor</item>
-        <item name="colorOnSurface">@color/backgroundLight</item>
+        <item name="colorSurface">@color/primary_light</item>
+        <item name="colorOnSurface">@color/primary_light</item>
 
         <item name="colorControlActivated">@color/font_light</item>
-        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="colorControlNormal">@color/primary_light</item>
         <item name="strokeWidth">3dp</item>
-        <item name="strokeColor">@color/primaryColor</item>
+        <item name="strokeColor">@color/primary_light</item>
         <item name="android:textColor">@color/font_light</item>
 
-        <item name="colorSecondary">@color/primaryColor</item>
-        <item name="colorOnSecondary">@color/backgroundLight</item>
+        <item name="colorSecondary">@color/primary_light</item>
+        <item name="colorOnSecondary">@color/background_light</item>
 
-        <item name="android:popupBackground">@color/offBackground</item>
-
+        <item name="android:popupBackground">@color/offBackground_light</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
 
     </style>

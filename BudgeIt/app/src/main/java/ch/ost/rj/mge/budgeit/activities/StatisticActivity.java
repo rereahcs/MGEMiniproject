@@ -85,7 +85,7 @@ public class StatisticActivity extends AppCompatActivity {
         String label = service.getCurrencySettingAsString(getApplicationContext());
         barDataSet = new BarDataSet(prepareBarData(), label);
 
-        int color = ContextCompat.getColor(getApplicationContext(), R.color.primaryColor);
+        int color = ContextCompat.getColor(getApplicationContext(), R.color.primary_light);
         barDataSet.setColor(color);
 
         barData = new BarData(barDataSet);

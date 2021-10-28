@@ -137,6 +137,7 @@ public class HomeActivity extends AppCompatActivity implements OnItemClickListen
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         adapter = new ItemsAdapter(data, this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        dividerItemDecoration.setDrawable(getApplicationContext().getResources().getDrawable(R.drawable.itemlist_divider));
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

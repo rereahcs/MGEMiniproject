@@ -1,7 +1,7 @@
 <resources>
 
     <style name="lines" parent="">
-        <item name="android:background">@color/primaryColor</item>
+        <item name="android:background">@color/primary_light</item>
     </style>
 
 </resources>
